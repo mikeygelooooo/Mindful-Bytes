@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% for post in posts %}
+<article>
+    <small>{{ post.author }}</small>
+    <small>{{ post.date_posted }}</small>
+    <h1>{{ post.title }}</h1>
+    <h3>{{ post.category }}</h3>
+    <h3>{{post.content}}</h3>
+</article>
+{% endfor %}
+{% endblock %}
