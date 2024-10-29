@@ -3,9 +3,13 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
 from .forms import SignupForm
+from django.urls import reverse
 
 # Create your views here.
 def login(request):
+    if request.user.is_authenticated:
+        return redirect(reverse('home'))
+    
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -18,6 +22,9 @@ def login(request):
     return render(request, 'User/login.html', {'form' : form})
 
 def signup(request):
+    if request.user.is_authenticated:
+        return redirect(reverse('home'))
+    
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
@@ -33,6 +40,6 @@ def profile(request):
     if request.user.is_authenticated:
         username = request.user.username
     else:
-        username = None
+        return redirect(reverse('login'))
 
     return render(request, 'User/profile.html', {'username': username})
