@@ -4,12 +4,33 @@
 
 {% block content %}
 {% for post in posts %}
-<article>
-    <small>{{ post.author }}</small>
-    <small>{{ post.date_posted }}</small>
-    <h1>{{ post.title }}</h1>
-    <h3>{{ post.category }}</h3>
-    <h3>{{post.content}}</h3>
-</article>
+
+<div class="bg-white rounded shadow-sm">
+    <article class="border-bottom p-3">
+        <div class="row">
+            <div class="col">
+                <div class="text-muted small mb-1">
+                    <i class="bi bi-person-circle"></i>
+                    <span>{{ post.author }}</span>
+                    <span class="mx-1">•</span>
+                    <span>{{ post.date_posted }}</span>
+                </div>
+
+                <h3 class="mb-1">
+                    <a href="{% url 'full_post' slug=post.slug %}" class="text-decoration-none fw-bold">{{ post.title }}</a>
+                </h3>
+
+                <div class="mb-1">
+                    <span class="badge bg-secondary">{{ post.category }}</span>
+                </div>
+
+                <p class="text-muted small mb-0">
+                    {{post.content|truncatewords:25}}
+                </p>
+            </div>
+        </div>
+    </article>
+
+</div>
 {% endfor %}
 {% endblock %}
