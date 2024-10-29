@@ -3,12 +3,68 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-    <h2>Sign Up</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sign Up</button>
-    </form>
-
-    <small>Already have an account? <a href="{% url 'login' %}">Log In</a></small>
+<h2>Sign Up</h2>
+<form method="post">
+    {% csrf_token %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger">
+        {% for error in form.non_field_errors %}
+        {{ error }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="form-group mb-3">
+        {{ form.username }}
+        {% if form.username.errors %}
+        <div class="text-danger">
+            {% for error in form.username.errors %}
+            {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="form-group mb-3">
+        {{ form.email }}
+        {% if form.email.errors %}
+        <div class="text-danger">
+            {% for error in form.email.errors %}
+            {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="form-group mb-3">
+        {{ form.password1 }}
+        {% if form.password1.errors %}
+        <div class="text-danger">
+            {% for error in form.password1.errors %}
+            {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="form-group mb-3">
+        {{ form.password2 }}
+        {% if form.password2.errors %}
+        <div class="text-danger">
+            {% for error in form.password2.errors %}
+            {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+    </div>
+    <div class="text-center mt-3">
+        <p>Already have an account? <a href="{% url 'login' %}">Log In</a></p>
+    </div>
+</form>
 {% endblock %}

@@ -6718,3 +6718,6 @@ MindfulBytes/__pycache__/urls.cpython-312.pyc
 MindfulBytes/__pycache__/wsgi.cpython-312.pyc
 User/__pycache__/urls.cpython-312.pyc
 User/__pycache__/views.cpython-312.pyc
+User/__pycache__/forms.cpython-312.pyc
+User/__pycache__/urls.cpython-312.pyc
+User/__pycache__/views.cpython-312.pyc
